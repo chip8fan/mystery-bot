@@ -3,7 +3,7 @@ import chess.engine
 import random
 board = chess.Board()
 engine = None
-engines = ["/usr/games/stockfish", "/usr/games/fairy-stockfish"]
+engines = ["/usr/games/stockfish", "/usr/games/fairy-stockfish", "/home/linuxbrew/.linuxbrew/bin/stockfish"]
 def set_random_skill(engine):
     skill_floor = None
     skill_ceiling = None
