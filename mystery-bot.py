@@ -3,14 +3,15 @@ import chess.engine
 import random
 board = chess.Board()
 engine = None
-engines = ["/usr/games/stockfish", "/usr/games/fairy-stockfish", "/home/linuxbrew/.linuxbrew/bin/stockfish"]
-def set_random_skill(engine):
+engines = [["/usr/local/bin/patricia", "Patricia"], ["/home/linuxbrew/.linuxbrew/bin/stockfish", "Stockfish"]]
+def set_random_skill(engine, engine_name):
+    skill_params = {"Stockfish": "Skill Level", "Patricia": "Skill_Level"}
     skill_floor = None
     skill_ceiling = None
     skill_test = -30
     while True:
         try:
-            engine.configure({"Skill Level": skill_test})
+            engine.configure({skill_params[engine_name]: skill_test})
             if skill_floor == None:
                 skill_floor = skill_test
         except chess.engine.EngineError:
@@ -19,7 +20,9 @@ def set_random_skill(engine):
         skill_test += 1
         if skill_ceiling != None:
             break
-    engine.configure({"Skill Level": random.randint(skill_floor, skill_ceiling)})
+    skill_level = random.randint(skill_floor, skill_ceiling)
+    engine.configure({skill_params[engine_name]: skill_level})
+    print(f"SKILL LEVEL: {skill_level}!")
 while True:
     line = input().split()
     if line[0] == "uci":
@@ -49,9 +52,13 @@ while True:
         best_move = engine.play(board, limit).move
         print(f"bestmove {best_move.uci()}")
     elif line[0] == "quit":
+        if engine != None:
+            engine.quit()
         break
     elif line[0] == "ucinewgame":
         if engine != None:
             engine.quit()
-        engine = chess.engine.SimpleEngine.popen_uci(random.choice(engines))
-        set_random_skill(engine)
+        current_engine = random.choice(engines)
+        engine = chess.engine.SimpleEngine.popen_uci(current_engine[0])
+        print(f"ENGINE: {current_engine[1]}!")
+        set_random_skill(engine, current_engine[1])
