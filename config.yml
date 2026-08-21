@@ -1,0 +1,30 @@
+token: ""
+url: "https://lichess.org/"
+engine:
+  dir: "/home/guest/Documents/dist/"
+  name: "mystery-bot"
+  protocol: "uci"
+move_overhead: 2000
+challenge:
+  accept_bot: true
+  variants:
+    - standard
+  time_controls:
+    - bullet
+    - blitz
+    - rapid
+    - classical
+  modes:
+    - casual
+    - rated
+matchmaking:
+  allow_matchmaking: true
+  challenge_timeout: 15
+  challenge_initial_time:
+    - 60
+    - 300
+    - 600
+    - 1800
+  challenge_increment:
+    - 2
+  challenge_mode: "rated"
