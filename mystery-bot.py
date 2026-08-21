@@ -3,9 +3,9 @@ import chess.engine
 import random
 board = chess.Board()
 engine = None
-engines = [["/usr/local/bin/patricia", "Patricia"], ["/home/linuxbrew/.linuxbrew/bin/stockfish", "Stockfish"], ["/usr/local/bin/dragon", "Dragon"]]
+engines = [["/usr/local/bin/patricia-5", "Patricia 5"], ["/usr/local/bin/stockfish-18", "Stockfish 18"], ["/usr/local/bin/dragon", "Dragon"], ["/usr/local/bin/simpleEval", "simpleEval"], ["/usr/local/bin/stockfish-classical", "Stockfish Classical"]]
 def set_random_skill(engine, engine_name):
-    skill_params = {"Stockfish": "Skill Level", "Patricia": "Skill_Level", "Dragon": "Skill"}
+    skill_params = {"Stockfish 18": "Skill Level", "Patricia 5": "Skill_Level", "Dragon": "Skill", "simpleEval": "Skill Level", "Stockfish Classical": "Skill Level"}
     skill_floor = None
     skill_ceiling = None
     skill_test = -30
